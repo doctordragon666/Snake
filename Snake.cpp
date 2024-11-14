@@ -1,20 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>//windows编程头文件
-#include <time.h>//欢迎大家到QQ群660142320学习交流
+#include <time.h>
 #include <conio.h>//控制台输入输出头文件
 
-#define SNAKESIZE 100//蛇的身体最大节数
-#define MAPWIDTH 100//宽度
-#define MAPHEIGHT 30//高度
-
-#ifndef __cplusplus
-
-typedef char bool;
-#define false 0
-#define true  1
-
-#endif
+#include "Snake.h"
 
 //食物的坐标
 struct {
@@ -28,19 +18,14 @@ struct {
 	int len;//蛇的长度
 	int x[SNAKESIZE];//组成蛇身的每一个小方块中x的坐标
 	int y[SNAKESIZE];//组成蛇身的每一个小方块中y的坐标
-
 }snake;
 
 //将光标移动到控制台的(x,y)坐标点处
 void gotoxy(int x, int y)
 {
-	COORD coord;
-	coord.X = x;
-	coord.Y = y;
+	COORD coord = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-
-
 
 //绘制游戏边框
 void drawMap();
@@ -271,5 +256,5 @@ int main()
 	gotoxy(MAPWIDTH / 2, MAPHEIGHT / 2 + 1);
 	printf("本次游戏得分为：%d\n", sorce);
 	Sleep(5000);
-	return 0;//欢迎大家到QQ群660142320学习交流
+	return 0;
 }
