@@ -1,13 +1,12 @@
-#pragma once
+#ifndef SNAKE_H
+#define SNAKE_H
 
-#define SNAKESIZE 100//ÉßµÄÉíÌå×î´ó½ÚÊý
-#define MAPWIDTH 100//¿í¶È
-#define MAPHEIGHT 30//¸ß¶È
+#define SNAKESIZE 100//è›‡çš„èº«ä½“æœ€å¤§èŠ‚æ•°
+#define MAPWIDTH 100//å®½åº¦
+#define MAPHEIGHT 30//é«˜åº¦
 
-#ifndef __cplusplus
-
-typedef char bool;
-#define false 0
-#define true  1
+#define W 15
+#define H W
+#define S (W * H)
 
 #endif
