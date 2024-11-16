@@ -1,34 +1,65 @@
-# 贪吃蛇
+# Snake Game [中文文档点这里](README_ZH.md)
 
-基于C++11和系统API的贪吃蛇，基于控制台，
+The snake game is based on C++11 and system APIs, and it runs on the console.
 
-### 运行示例
+There are two unresolved issues in this project:
 
-点击release包可以下载程序，这里给出shell运行结果。
+1. Food may be generated on the snake's body.
+2. The moving speed is inconsistent when moving up and down due to characters.
+
+### Running Example
+
+You can download the program by clicking on the release package. Here is the result of running it in the shell.
 
 ```shell
+$ g++.\Snake.cpp -o Snake
+$.\Snake.exe
+00000000000000000000000000000000000
+0                                 0
+0                                 0
+0                                 0
+0                                 0
+0   Y                             0
+0                                 0
+0                                 0
+0                                 0
+0                                 0
+0                                 0
+0         D                       0
+0         D                       0
+0         D                       0
+00000000000000000000000000000000000
 
+
+Game over! You get 0 scores.
 ```
 
-
-
-### 流程图
+### Flow Chart
 
 ```mermaid
 flowchart LR
-	初始化 --> 打印地图 --> 获取按键 --> 处理 --> A{判断游戏结果}
-	A --> |是| 结束
-	A -->|否| 打印地图
+	Initialization --> PrintMap --> GetKey --> Process --> A{"Judge Game Result"}
+	A --> |Yes| End
+	A -->|No| PrintMap
 ```
 
+### Key Algorithms
 
+Regarding how to update the position of the snake, a bidirectional queue in the C++ Standard Template Library (STL) is used to update the snake's position.
 
-### 关键算法
+```mermaid
+flowchart LR
+	init("Initialize the coordinates of three snake positions and add them to the queue") --> getkey("Get keyboard messages") -->|Game hotkeys| c1
+	getkey -->|ESC key| e(Exit)
+	del("Delete the tail node")
+	isfood("Is it food?") -->|Yes| push
+	isfood -->|No| del
+	c1{"Is the direction opposite to the snake's moving direction?"} -->|Yes| movea("The snake moves according to the previous direction") --> isfood
+	push("Update the coordinates of the head node and add it to the front of the queue") --- getkey
+	del --> push
+	c1 -->|No| moveb("The snake moves according to the currently specified direction") --> isfood
+```
 
-如何更新贪吃蛇的位置
+### License
 
-
-
-### 许可证
-
-没有许可证，默认是不能随便分发的。
+Since there is no license, it cannot be distributed casually by default. 

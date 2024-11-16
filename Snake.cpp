@@ -1,6 +1,4 @@
 #include <windows.h>
-#include "Snake.h"
-
 #include <array>
 #include <memory>
 #include <string>
@@ -12,49 +10,11 @@
 #include <time.h>
 #include <conio.h>
 
+#include "Snake.h"
+
+
 static int eat_food = 0;
 static int score = 0;
-struct Map
-{
-public:
-    Map()
-    {
-        for (int col = 0; col < MAPHEIGHT; col++)
-        {
-            for (int row = 0; row < MAPWIDTH; row++)
-            {
-                if (col == 0 || col == MAPHEIGHT - 1 || row == 0 || row == MAPWIDTH - 1)
-                    m_map[col][row] = WALL;
-                else
-                    m_map[col][row] = AIR;
-            }
-        }
-    }
-    void printMap()
-    {
-        std::string s;
-        for (auto &i : m_map)
-        {
-            for (auto &j : i)
-            {
-                s += material[j];
-            }
-            s += '\n';
-        }
-        puts(s.c_str());
-    }
-    void update(int x, int y, charPrint value)
-    {
-        m_map[y][x] = value;
-    }
-    char getType(int x, int y)
-    {
-        return m_map[y][x];
-    }
-
-private:
-    std::array<std::array<int, MAPWIDTH>, MAPHEIGHT> m_map;
-};
 
 class Snake
 {
@@ -115,7 +75,7 @@ public:
         else
         {
             eat_food = 0;
-            end = {-1,-1};
+            end = {-1, -1};
         }
     }
     // 游戏结束返回真
@@ -181,7 +141,11 @@ public:
         isOver = m_snake->checkStatus();
         m_snake->update();
 
-        if(eat_food == 0) generateFood();
+        if (eat_food == 0)
+        {
+            generateFood();
+            score++;
+        }
     }
 
 private:
@@ -217,5 +181,5 @@ int main()
         Sleep(200);
     } while (!gm->isOver);
 
-    printf("\nGame over! You get %d scores.\n", eat_food);
+    printf("\nGame over! You get %d scores.\n", score);
 }
